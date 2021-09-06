@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Calculadora</string>
+    <string name="display">0</string>
+    <string name="boton0">0</string>
+    <string name="boton1">1</string>
+    <string name="boton2">2</string>
+    <string name="boton3">3</string>
+    <string name="boton4">4</string>
+    <string name="boton5">5</string>
+    <string name="boton6">6</string>
+    <string name="boton7">7</string>
+    <string name="boton8">8</string>
+    <string name="boton9">9</string>
+    <string name="botonEntre">/</string>
+    <string name="botonPor">x</string>
+    <string name="botonMenos">-</string>
+    <string name="botonMas">+</string>
+    <string name="botonIgual">=</string>
+    <string name="botonPunto">.</string>
+    <string name="botonMasMenos">+/-</string>
+    <string name="botonInversa">1/x</string>
+    <string name="botonCuadrado">x²</string>
+    <string name="botonRaizCuadrada">²√</string>
+    <string name="botonClearEverything">ce</string>
+    <string name="botonClear">⌫</string>
+    <string name="botonRaizN" translatable="false">ⁿ√</string>
+    <string name="botonPotenciaN">xⁿ</string>
+    <string name="botonPi">𝛑</string>
+    <string name="botonStore">store</string>
+    <string name="botonRecall">recall</string>
+    <string name="botonMemMas">mem+</string>
+    <string name="botonMemMenos">mem-</string>
+    <string name="botonMemClear">memc</string>
+    <string name="botonSin">sin(x)</string>
+    <string name="botonCos">cos(x)</string>
+    <string name="operacionActualDisplay">0</string>
+    <string name="memoryDisplay">0</string>
+    <string name="memoryHeader">Memory</string>
+    <string name="operacionActualHeader">Current operation</string>
+</resources>
