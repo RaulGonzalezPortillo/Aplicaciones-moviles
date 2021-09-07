@@ -170,7 +170,9 @@ class MainActivity : AppCompatActivity() {
             operacionPresionada == "recall" ||
             operacionPresionada == "mem+" ||
             operacionPresionada == "mem-" ||
-            operacionPresionada == "memc"
+            operacionPresionada == "memc" ||
+            operacionPresionada == "cos(x)" ||
+            operacionPresionada == "sin(x)"
         ) {
             //Presiona '=' inmediatamente
             calculadoraViewModel.ejecutaOperacion("=")
