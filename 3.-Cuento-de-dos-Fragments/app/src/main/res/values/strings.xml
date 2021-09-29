@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Cuento de dos Fragments</string>
+    <string name="botonModificarTexto">Modificar texto</string>
+    <string name="hintCampoModificarTexto">Texto de ejemplo</string>
+    <string name="labelTexto">Fragmento #2</string>
+</resources>

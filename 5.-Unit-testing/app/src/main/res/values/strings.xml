@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Unit Testing</string>
+    <string name="mainTitle">Expresso</string>
+    <string name="nameEditText">Nombre</string>
+    <string name="lastNameEditText">Apellido</string>
+    <string name="genderLabel">Pick your gender</string>
+    <string name="registerButton">Registrar</string>
+    <string name="dataLabel">Actividad de datos</string>
+</resources>

@@ -3,4 +3,8 @@
     <string name="botonEditar">Editar</string>
     <string name="labelEmailHeader">Para editar tu correo, presiona editar</string>
     <string name="labelEmail">correo@email.com</string>
+    <string name="botonAceptar">Aceptar</string>
+    <string name="botonCancelar">Cancelar</string>
+    <string name="labelEditarEmail">Haga click en Aceptar para cambiar su correo</string>
+    <string name="hintCampoEditarEmail">Escriba el nuevo correo aquí</string>
 </resources>

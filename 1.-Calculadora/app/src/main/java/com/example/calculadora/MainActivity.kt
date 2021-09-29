@@ -3,6 +3,7 @@ package com.example.calculadora
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Debug
 import android.util.Log
 import android.widget.Button
 import android.view.View
@@ -154,6 +155,7 @@ class MainActivity : AppCompatActivity() {
 
     //Controla el comportamiento de los botones de función ('+', '/', etc...)
     fun presionaFuncion(boton: View) {
+        Debug.startMethodTracing("demo.trace");
         val operacionPresionada = (boton as Button).text.toString()
         if (calculadoraViewModel.escribiendoNumero) {
             calculadoraViewModel.setOperando(display.text.toString().toDouble())
@@ -197,5 +199,6 @@ class MainActivity : AppCompatActivity() {
         display.text = dec.format(calculadoraViewModel.resultado)
         calculadoraViewModel.memory = calculadoraViewModel.getMemory()
         memoryDisplay.text = dec.format(calculadoraViewModel.memory)
+        Debug.stopMethodTracing();
     }
 }
