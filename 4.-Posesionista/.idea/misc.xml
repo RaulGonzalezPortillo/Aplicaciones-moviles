@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/4.-Posesionista/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/4.-Posesionista/app/src/main/res/layout/cosa_fragment.xml" value="0.22552083333333334" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/4.-Posesionista/app/src/main/res/layout/cosa_layour.xml" value="0.36666666666666664" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/4.-Posesionista/app/src/main/res/layout/cosa_layout.xml" value="0.17831813576494426" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/4.-Posesionista/app/src/main/res/layout/fragment_cosa.xml" value="0.75" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/4.-Posesionista/app/src/main/res/layout/lista_cosas_fragment.xml" value="0.22" />
       </map>
     </option>
   </component>

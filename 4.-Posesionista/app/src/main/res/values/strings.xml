@@ -4,4 +4,6 @@
     <string name="labelPrecio">Precio</string>
     <string name="labelSerie">No. de serie</string>
     <string name="labelFecha">Fecha</string>
+    <string name="label_nombre">Nombre</string>
+    <string name="label_precio">Precio</string>
 </resources>

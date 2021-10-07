@@ -7,8 +7,8 @@ class TablaCosasViewModel: ViewModel() {
     //Declaramos el inventario
     val inventario = mutableListOf<Cosa>()
     //Y una lista con nombres y adjetivos
-    val nombres = arrayOf("Teléfono", "Pan", "Playera")
-    val adjetivos = arrayOf("Gris", "Suave", "Cómoda")
+    private val nombres = arrayOf("Teléfono", "Pan", "Playera")
+    private val adjetivos = arrayOf("Gris", "Suave", "Cómoda")
     init {
         for(i in 0 until 100) {
             val cosa = Cosa()
