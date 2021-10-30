@@ -1,9 +1,9 @@
 package com.example.posesionista
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val TAG = "CosaFragment"
 
@@ -31,14 +33,16 @@ class CosaFragment: Fragment() {
     private lateinit var labelFecha: TextView
     private lateinit var imagenCosa: ImageView
     private lateinit var botonCamara: ImageButton
+    private lateinit var botonFecha: ImageButton
     private lateinit var archivoFoto: File
 
     //Contrato para el registro de la respuesta de la cámara
-    var respuestaCamara = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private var respuestaCamara = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         resultado ->
         //Si el resultado fué OK
         if(resultado.resultCode == Activity.RESULT_OK) {
             //Extrae la información del resultado
+            @Suppress("UNUSED_VARIABLE")
             var datos = resultado.data
             //Asignamos la imágen tomada al ImageView de la cosa
             //imagenCosa.setImageBitmap(datos?.extras?.get("data") as Bitmap)
@@ -62,8 +66,9 @@ class CosaFragment: Fragment() {
         campoNombre = vista.findViewById(R.id.campoNombre) as EditText
         campoPrecio = vista.findViewById(R.id.campoPrecio) as EditText
         campoNumeroSerie = vista.findViewById(R.id.campoNumeroSerie) as EditText
-        labelFecha = vista.findViewById(R.id.labelFecha) as TextView
+        labelFecha = vista.findViewById(R.id.campoFecha) as TextView
         botonCamara = vista.findViewById(R.id.botonCamara)
+        botonFecha = vista.findViewById(R.id.botonFecha)
         imagenCosa = vista.findViewById(R.id.imagenCosa) as ImageView
         //Extrae la foto guardada en disco para la cosa
         archivoFoto = File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "${cosa.id}.jpg")
@@ -72,7 +77,7 @@ class CosaFragment: Fragment() {
         campoNombre.setText(cosa.nombre)
         campoPrecio.setText(cosa.precio.toString())
         campoNumeroSerie.setText(cosa.numeroSerie)
-        labelFecha.text = cosa.fecha.toString()
+        labelFecha.text = cosa.fecha
         return vista
     }
 
@@ -127,7 +132,37 @@ class CosaFragment: Fragment() {
         val barraActividad = activity as AppCompatActivity
         //Cambiamos el título
         barraActividad.supportActionBar?.setTitle(R.string.tituloCosaFragment)
-        //Al botón de cámara le agregamos un onClickListener
+
+        //Al botón de fecha le agregamos un onClickListener
+        botonFecha.apply {
+            setOnClickListener {
+                //Obtenemos la fecha actual
+                val fechaActual = SimpleDateFormat( "dd-MM-yyyy", Locale.getDefault()).format(Date())
+                //La separamos en día, mes y año
+                val fechaDividida = fechaActual.split("-")
+                val maxYear = fechaDividida[2].toInt()
+                val maxMonth = fechaDividida[1].toInt()
+                val maxDay = fechaDividida[0].toInt()
+
+                //Creamos el DatePicker
+                val dialogoDatePicker = activity?.let {vista ->
+                    DatePickerDialog(vista, {_, year, month, day ->
+                    //Obtenemos la nueva fecha
+                        val nuevaFecha = "${day}-${month + 1}-${year}"
+                        //La colocamos en pantalla
+                        labelFecha.text = nuevaFecha
+                        //Y la guardamos en la cosa seleccionada
+                        cosa.fecha = nuevaFecha
+                    //Limitamos el rango de DatePicker para que no permita escoger fechas futuras
+                    }, maxYear, maxMonth, maxDay)
+                }
+
+                dialogoDatePicker?.datePicker?.maxDate = Date().time // Establecemos la fecha máxima a usar en el calendario.
+                dialogoDatePicker?.show()
+            }
+        }
+
+        //De igual forma, al botón de cámara le agregamos un onClickListener
         botonCamara.apply {
             setOnClickListener {
                 //Creamos un nuevo intento para tomar una fotografía
@@ -147,7 +182,7 @@ class CosaFragment: Fragment() {
 
     private fun obtenerArchivoFoto(nombreArchivo: String): File {
         //Obtenemos la ruta del directorio de fotos
-        var pathFotos = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val pathFotos = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File(pathFotos, nombreArchivo)
     }
 

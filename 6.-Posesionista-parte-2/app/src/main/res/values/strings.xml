@@ -8,4 +8,5 @@
     <string name="tituloCosaFragment">Editar cosa</string>
     <string name="descripcionBotonCamara">Botón de cámara</string>
     <string name="descripcionImagenCosa">Imágen del objeto</string>
+    <string name="descripcionBotonFecha">Botón editar fecha</string>
 </resources>

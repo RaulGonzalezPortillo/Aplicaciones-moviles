@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION", "UNUSED")
+
 package com.example.posesionista
 
 import android.annotation.SuppressLint
@@ -11,8 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.app.AlertDialog
+import kotlin.collections.*
+import java.util.*
 
 private const val TAG = "TablaCosasFragment"
 
@@ -62,7 +68,7 @@ class TablaCosasFragment: Fragment() {
         val vista = inflater.inflate(R.layout.lista_cosas_fragment, container, false)
         cosaRecyclerView = vista.findViewById(R.id.cosa_recycler_view) as RecyclerView
         cosaRecyclerView.layoutManager = LinearLayoutManager(context)
-        actualizarUI()
+        actualizarUIYGestos()
         return vista
     }
 
@@ -95,11 +101,39 @@ class TablaCosasFragment: Fragment() {
         //Cambiamos el título
         barraActividad.supportActionBar?.setTitle(R.string.app_name)
     }
-    
-    private fun actualizarUI() {
+
+    private fun actualizarUIYGestos() {
         val inventario = tablaCosasViewModel.inventario
         adaptador = CosaAdapter(inventario)
         cosaRecyclerView.adapter = adaptador
+
+        //Hacemos un callback a ItemTouchHelper, especificando las direcciones que vamos a utilizar
+        val callbackGestos = object: ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+            //Al arrastrar y soltar
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                //Obtenemos las posiciones del elemento
+                val posicionInicial = viewHolder.adapterPosition
+                val posicionFinal = target.adapterPosition
+                //Intercambiamos la posición de la cosa en el inventario
+                Collections.swap(inventario, posicionInicial, posicionFinal)
+                adaptador?.notifyItemMoved(posicionInicial, posicionFinal)
+                return false
+            }
+            //Al deslizar...
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                //...hacia la izquierda
+                if(direction == ItemTouchHelper.LEFT) {
+                    adaptador?.remueveCosa(viewHolder.adapterPosition)
+                }
+            }
+        }
+        //Adjunta el ItemTouchHelper a cosaRecyclerView
+        val itemTouchHelper = ItemTouchHelper(callbackGestos)
+        itemTouchHelper.attachToRecyclerView(cosaRecyclerView)
     }
 
     private inner class CosaHolder(vista: View): RecyclerView.ViewHolder(vista), View.OnClickListener {
@@ -151,6 +185,11 @@ class TablaCosasFragment: Fragment() {
     }
 
     private inner class CosaAdapter(var inventario: List<Cosa>): RecyclerView.Adapter<CosaHolder>() {
+        override fun onBindViewHolder(holder: CosaHolder, position: Int) {
+            val cosa = inventario[position]
+            holder.binding(cosa)
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CosaHolder {
             val holder = layoutInflater.inflate(R.layout.cosa_layout, parent, false)
             return CosaHolder(holder)
@@ -160,9 +199,32 @@ class TablaCosasFragment: Fragment() {
             return inventario.size
         }
 
-        override fun onBindViewHolder(holder: CosaHolder, position: Int) {
-            val cosa = inventario[position]
-            holder.binding(cosa)
+        //Función que elimína items del inventario
+        @SuppressLint("NotifyDataSetChanged")
+        fun remueveCosa(posicion: Int) {
+            val constructor = AlertDialog.Builder(activity)
+            constructor.setTitle("Advertencia")
+            constructor.setMessage("¿Desea eliminar esta cosa?")
+            //Si el usuario hace dismiss (dando tap fuera del dialogo por ejemplo)
+            constructor.setOnDismissListener {
+                //Actualiza la vista
+                notifyDataSetChanged()
+            }
+            //Si hace tap en Aceptar
+            constructor.setPositiveButton("Aceptar") { _ , _ ->
+                //Remueve del inventario el item con la posición recibida
+                inventario = inventario.filterIndexed { indice, _ ->
+                    indice != posicion
+                }
+                notifyDataSetChanged()
+            }
+            //Si hace tap en Cancelar
+            constructor.setNegativeButton("Cancelar") { _ , _ ->
+                notifyDataSetChanged()
+            }
+            //Creamos un AlertDialog con el constructor y lo mostramos al usuario
+            val alerta: AlertDialog = constructor.create()
+            alerta.show()
         }
     }
 }

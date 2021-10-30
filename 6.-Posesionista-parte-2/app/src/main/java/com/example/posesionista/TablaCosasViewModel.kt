@@ -2,15 +2,18 @@ package com.example.posesionista
 
 import androidx.lifecycle.ViewModel
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TablaCosasViewModel: ViewModel() {
     //Declaramos el inventario
-    val inventario = mutableListOf<Cosa>()
+    val inventario = ArrayList<Cosa>()
+
     //Y una lista con nombres y adjetivos
     private val nombres = arrayOf("Teléfono", "Pan", "Sweater")
     private val adjetivos = arrayOf("gris", "suave", "cómodo")
+
     init {
-        for(i in 0 until 10) {
+        for (i in 0 until 10) {
             val cosa = Cosa()
             //Generamos un nombre aleatorio
             val nombreAleatorio = nombres.random()
@@ -23,6 +26,7 @@ class TablaCosasViewModel: ViewModel() {
             inventario += cosa
         }
     }
+
     //Función que agrega una cosa al inventario
     fun agregaCosa(cosa: Cosa) {
         inventario.add(cosa)

@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/labelNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,7 +30,6 @@
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/labelPrecio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -83,28 +81,29 @@
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:id="@+id/labelFecha"
+        android:id="@+id/campoFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/labelFecha"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoNumeroSerie" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/botonFecha"
+        app:layout_constraintStart_toStartOf="@+id/campoNumeroSerie"
+        app:layout_constraintTop_toTopOf="@+id/botonFecha" />
 
     <ImageView
         android:id="@+id/imagenCosa"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/descripcionImagenCosa"
         app:layout_constraintBottom_toTopOf="@+id/botonCamara"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelFecha"
+        app:layout_constraintTop_toBottomOf="@+id/botonFecha"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <ImageButton
@@ -119,5 +118,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_camera"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/botonFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/descripcionBotonFecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoNumeroSerie"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/labelFecha"
+        app:layout_constraintBottom_toBottomOf="@+id/campoFecha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/campoFecha" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
