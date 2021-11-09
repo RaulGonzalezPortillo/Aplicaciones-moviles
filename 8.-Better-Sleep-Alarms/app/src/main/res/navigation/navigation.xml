@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/sleepFragment">
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.raulgonzalezportillo.bettersleepalarms.SleepFragment"
+        android:label="@string/sleep_fragment_title"
+        tools:layout="@layout/fragment_sleep">
+        <action
+            android:id="@+id/action_sleepFragment_to_sleepingFragment"
+            app:destination="@id/sleepingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmsFragment"
+        android:name="com.raulgonzalezportillo.bettersleepalarms.AlarmsFragment"
+        android:label="@string/alarms_fragment_title"
+        tools:layout="@layout/fragment_alarms" >
+        <action
+            android:id="@+id/action_alarmsFragment_to_createAlarmsFragment"
+            app:destination="@id/createAlarmsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.raulgonzalezportillo.bettersleepalarms.SettingsFragment"
+        android:label="@string/settings_fragment_title"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/sleepingFragment"
+        android:name="com.raulgonzalezportillo.bettersleepalarms.SleepingFragment"
+        android:label="fragment_sleeping"
+        tools:layout="@layout/fragment_sleeping" >
+        <action
+            android:id="@+id/action_sleepingFragment_to_sleepFragment"
+            app:destination="@id/sleepFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAlarmsFragment"
+        android:name="com.raulgonzalezportillo.bettersleepalarms.CreateAlarmsFragment"
+        android:label="fragment_create_alarms"
+        tools:layout="@layout/fragment_create_alarms" />
+</navigation>

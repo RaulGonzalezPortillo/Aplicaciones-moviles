@@ -2,12 +2,117 @@ package com.example.hipnosis
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
+import androidx.core.view.GestureDetectorCompat
+
+private const val TAG = "ActividadHipnosis"
+private lateinit var vistaHipnosis: VistaHipnosis
 
 class ActividadHipnosis : AppCompatActivity() {
+    private lateinit var detectorGestos: GestureDetectorCompat
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.actividad_hipnosis)
-        val vistaHipnosis = VistaHipnosis(this)
         supportActionBar?.hide()
+        vistaHipnosis = findViewById(R.id.vistaHipnosis)
+        //detectorGestos = GestureDetectorCompat(this, this)
+        detectorGestos = GestureDetectorCompat(this, ListenerGestos())
     }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        /*
+        val posicion = PointF(event.x, event.y)
+        var evento = ""
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                evento = "ACTION_DOWN"
+            }
+            MotionEvent.ACTION_MOVE -> {
+                vistaHipnosis.x = posicion.x
+                vistaHipnosis.y = posicion.y
+                evento = "ACTION_MOVE"
+            }
+            MotionEvent.ACTION_UP -> {
+                evento = "ACTION_UP"
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                evento = "ACTION_CANCEL"
+            }
+        }
+        Log.i(TAG, "$evento sucedió en x = ${posicion.x}, y = ${posicion.y}")
+        return true
+        */
+        if(detectorGestos.onTouchEvent(event)) {
+            return true
+        }
+        super.onTouchEvent(event)
+        return false
+    }
+
+    private class ListenerGestos: GestureDetector.SimpleOnGestureListener() {
+        override fun onDown(e: MotionEvent?): Boolean {
+            Log.d(TAG, "onDown en el Listener anidado")
+            return true
+        }
+        override fun onScroll(
+            e1: MotionEvent?,
+            e2: MotionEvent?,
+            distanceX: Float,
+            distanceY: Float
+        ): Boolean {
+            Log.d(TAG, "onScroll en el Listener anidado")
+            vistaHipnosis.x -= distanceX
+            vistaHipnosis.y -= distanceY
+            return true
+        }
+    }
+
+    /*
+    override fun onDown(p0: MotionEvent?): Boolean {
+        Log.d(TAG, "onDown: $p0")
+        return true
+    }
+
+    override fun onShowPress(p0: MotionEvent?) {
+        Log.d(TAG, "onShowPress: $p0")
+    }
+
+    override fun onSingleTapUp(p0: MotionEvent?): Boolean {
+        Log.d(TAG, "onSingleTapUp: $p0")
+        return true
+    }
+
+    override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        Log.d(TAG, "onScroll: $p0, $p1, $p2, $p3")
+        vistaHipnosis.x -= p2
+        vistaHipnosis.y -= p3
+        return true
+    }
+
+    override fun onLongPress(p0: MotionEvent?) {
+        Log.d(TAG, "onLongPress: $p0")
+    }
+
+    override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        Log.d(TAG, "onFling: $p0, $p1, $p2, $p3")
+        return true
+    }
+
+    override fun onSingleTapConfirmed(p0: MotionEvent?): Boolean {
+        Log.d(TAG, "onSingleTapConfirmed: $p0")
+        return true
+    }
+
+    override fun onDoubleTap(p0: MotionEvent?): Boolean {
+        Log.d(TAG, "onDoubleTap: $p0")
+        return true
+    }
+
+    override fun onDoubleTapEvent(p0: MotionEvent?): Boolean {
+        Log.d(TAG, "onDoubleTapEvent: $p0")
+        return true
+    }*/
 }

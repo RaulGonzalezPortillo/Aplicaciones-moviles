@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Posesionista</string>
+    <string name="labelNombre">Nombre</string>
+    <string name="labelPrecio">Precio</string>
+    <string name="labelSerie">No. de serie</string>
+    <string name="labelFecha">Fecha</string>
+    <string name="itemNuevaCosa">Nueva cosa</string>
+    <string name="tituloCosaFragment">Editar cosa</string>
+    <string name="descripcionBotonCamara">Botón de cámara</string>
+    <string name="descripcionImagenCosa">Imágen del objeto</string>
+    <string name="descripcionBotonFecha">Botón editar fecha</string>
+    <string name="descripcionThumbnailCosa">Miniatura de la cosa</string>
+    <string name="labelSeccion">Sección</string>
+    <string name="headerNumeroCosas">Número de cosas:</string>
+    <string name="headerSumaPrecios">Suma de los precios:</string>
+    <string name="labelNumeroCosas">0</string>
+    <string name="labelSumaPrecios">$0</string>
+</resources>

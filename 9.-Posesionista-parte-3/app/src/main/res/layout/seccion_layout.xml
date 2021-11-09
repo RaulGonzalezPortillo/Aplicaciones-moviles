@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/seccionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/labelSeccion"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cosasRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seccionTextView" />
+
+    <TextView
+        android:id="@+id/headerNumeroCosas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/headerNumeroCosas"
+        app:layout_constraintStart_toStartOf="@+id/seccionTextView"
+        app:layout_constraintTop_toBottomOf="@+id/cosasRecyclerView" />
+
+    <TextView
+        android:id="@+id/headerSumaPrecios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/headerSumaPrecios"
+        app:layout_constraintStart_toEndOf="@+id/headerNumeroCosas"
+        app:layout_constraintTop_toTopOf="@+id/headerNumeroCosas" />
+
+    <TextView
+        android:id="@+id/numeroCosasTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/labelNumeroCosas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/headerNumeroCosas"
+        app:layout_constraintTop_toBottomOf="@+id/headerNumeroCosas" />
+
+    <TextView
+        android:id="@+id/sumaPreciosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelSumaPrecios"
+        app:layout_constraintStart_toStartOf="@+id/headerSumaPrecios"
+        app:layout_constraintTop_toBottomOf="@+id/headerSumaPrecios" />
+</androidx.constraintlayout.widget.ConstraintLayout>

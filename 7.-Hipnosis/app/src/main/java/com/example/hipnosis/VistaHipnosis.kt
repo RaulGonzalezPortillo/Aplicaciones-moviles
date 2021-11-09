@@ -1,10 +1,7 @@
 package com.example.hipnosis
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.PointF
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.util.SizeF
@@ -16,6 +13,9 @@ import kotlin.random.Random
 private const val TAG = "VistaHipnosis"
 
 class VistaHipnosis(context: Context, attrs: AttributeSet? = null): View(context, attrs) {
+
+    private var coordenadaToque = PointF(0F, 0F)
+
     private val paintLinea = Paint().apply {
         color = Color.RED
         strokeWidth = 10F
@@ -23,8 +23,14 @@ class VistaHipnosis(context: Context, attrs: AttributeSet? = null): View(context
 
     private val paintCirculo = Paint().apply {
         color = Color.BLACK
-        strokeWidth = 10F
+        strokeWidth = 20F
         style = Paint.Style.STROKE
+    }
+
+    private val paintTexto = Paint().apply {
+        color = Color.BLACK
+        textSize = 80F
+        typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
     }
 
     private fun dibujaTache(canvas: Canvas) {
@@ -35,14 +41,26 @@ class VistaHipnosis(context: Context, attrs: AttributeSet? = null): View(context
 
     private fun dibujaCirculo(canvas: Canvas) {
         val tamanoVista = SizeF(measuredWidth.toFloat(), measuredHeight.toFloat())
-        val radioCirculo = min(tamanoVista.width / 2, tamanoVista.height / 2)
-        canvas.drawCircle(tamanoVista.width / 2, tamanoVista.height / 2, radioCirculo - 50, paintCirculo)
+        val radioMinimo = min(tamanoVista.width, tamanoVista.height)
+        val radioMaximo = Math.max(tamanoVista.width, tamanoVista.height)
+        for (radioActual in radioMaximo.toInt() downTo 0 step 40) {
+            canvas.drawCircle(tamanoVista.width / 2, tamanoVista.height / 2, radioActual.toFloat(), paintCirculo)
+        }
+    }
+
+    private fun dibujaTexto(canvas: Canvas) {
+        val tamanoVista = SizeF(measuredWidth.toFloat(), measuredHeight.toFloat())
+        val texto = "Tienes mucho sueño"
+        val rectanguloTexto = Rect()
+        paintTexto.getTextBounds(texto, 0, texto.length, rectanguloTexto)
+        canvas.drawText(texto, (tamanoVista.width - rectanguloTexto.width()) / 2F, tamanoVista.height / 2F, paintTexto)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         dibujaCirculo(canvas)
-        dibujaTache(canvas)
+        //dibujaTache(canvas)
+        dibujaTexto(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -53,6 +71,7 @@ class VistaHipnosis(context: Context, attrs: AttributeSet? = null): View(context
                 accion = "ACTION_DOWN"
                 paintLinea.color = Color.argb(255, Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
                 paintCirculo.color = Color.argb(255, Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
+                coordenadaToque = ubicacionTap
                 //Pide al sistema que en el siguiente refresco de pantalla vuelva a pintar la vista
                 invalidate()
             }
@@ -60,6 +79,8 @@ class VistaHipnosis(context: Context, attrs: AttributeSet? = null): View(context
                 accion = "ACTION_MOVE"
                 paintLinea.color = Color.argb(255, Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
                 paintCirculo.color = Color.argb(255, Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
+                this.x += ubicacionTap.x - coordenadaToque.x
+                this.y += ubicacionTap.y - coordenadaToque.y
                 invalidate()
             }
             MotionEvent.ACTION_UP -> {

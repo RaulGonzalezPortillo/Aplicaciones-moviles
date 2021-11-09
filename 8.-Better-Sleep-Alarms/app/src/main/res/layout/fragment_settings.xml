@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActividadHipnosis">
+    android:background="@drawable/dark_gradient"
+    tools:context=".SettingsFragment">
 
-    <com.example.hipnosis.VistaHipnosis
-        android:id="@+id/vistaHipnosis"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="200dp"
-        android:layout_marginBottom="360dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_placeholder"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
