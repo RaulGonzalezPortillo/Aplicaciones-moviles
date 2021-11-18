@@ -2,12 +2,13 @@ package com.example.posesionista
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-
-private const val TAG = "MainActivity"
 
 //Especificamos que vamos a implementar la interfaz de tabla de cosas
 class MainActivity : AppCompatActivity(), TablaCosasFragment.InterfazTablaCosas {
+    private var cosaActual = Cosa()
+    private var tablaCosasViewModel: TablaCosasViewModel? = null
+    private var posicionCosaActual: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,12 +25,19 @@ class MainActivity : AppCompatActivity(), TablaCosasFragment.InterfazTablaCosas 
 
     //Implementamos onCosaSeleccionada
     override fun onCosaSeleccionada(cosa: Cosa, viewModel: TablaCosasViewModel) {
-        Log.d(TAG, "MainActivity recibió la cosa: ${cosa.nombre} con UUID: ${cosa.numeroSerie}")
+        cosaActual = cosa
+        tablaCosasViewModel = viewModel
+        posicionCosaActual = viewModel.determinarSeccion(cosa.precio)
         val fragmento = CosaFragment.nuevaInstancia(cosa)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragmento)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        tablaCosasViewModel?.ordenarSeccion(cosaActual, posicionCosaActual)
+        super.onBackPressed()
     }
 }

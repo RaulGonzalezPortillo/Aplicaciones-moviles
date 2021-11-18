@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Property Animation</string>
+    <string name="botonRotar">Rotar</string>
+    <string name="descripcionImagenMrSparkle">Imágen de Mr. Sparkle</string>
+    <string name="botonMover">Mover</string>
+    <string name="botonEscalar">Escalar</string>
+    <string name="botonTransparencia">Transparencia</string>
+    <string name="botonColores">Colores</string>
+    <string name="botonMulti">Multi Mr. Sparkle</string>
+</resources>

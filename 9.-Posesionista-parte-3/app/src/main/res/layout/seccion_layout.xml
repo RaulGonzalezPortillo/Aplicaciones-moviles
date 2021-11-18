@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/seccion_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,6 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="@string/labelSeccion"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/headerNumeroCosas"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/seccionTextView"
         app:layout_constraintTop_toBottomOf="@+id/cosasRecyclerView" />
 
@@ -38,8 +41,9 @@
         android:id="@+id/headerSumaPrecios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="48dp"
         android:text="@string/headerSumaPrecios"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toEndOf="@+id/headerNumeroCosas"
         app:layout_constraintTop_toTopOf="@+id/headerNumeroCosas" />
 
@@ -49,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/labelNumeroCosas"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/headerNumeroCosas"
         app:layout_constraintTop_toBottomOf="@+id/headerNumeroCosas" />
@@ -58,6 +64,84 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/labelSumaPrecios"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/headerSumaPrecios"
         app:layout_constraintTop_toBottomOf="@+id/headerSumaPrecios" />
+
+    <ImageButton
+        android:id="@+id/botonOrdenAlfabetico"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="#75000000"
+        android:contentDescription="@string/descripcionBotonOrdenAlfabetico"
+        app:layout_constraintBottom_toBottomOf="@+id/seccionTextView"
+        app:layout_constraintEnd_toStartOf="@+id/ordenAlfabeticoTextView"
+        app:layout_constraintTop_toTopOf="@+id/seccionTextView"
+        app:srcCompat="@android:drawable/ic_menu_sort_alphabetically"
+        tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/botonOrdenCronologico"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="#80000000"
+        android:contentDescription="@string/descripcionBotonOrdenCronologico"
+        app:layout_constraintBottom_toBottomOf="@+id/botonOrdenAlfabetico"
+        app:layout_constraintEnd_toStartOf="@+id/ordenCronologicoTextView"
+        app:layout_constraintTop_toTopOf="@+id/botonOrdenAlfabetico"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/ordenAlfabeticoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/labelOrden"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/botonOrdenAlfabetico"
+        app:layout_constraintEnd_toStartOf="@+id/botonOrdenCronologico"
+        app:layout_constraintTop_toTopOf="@+id/botonOrdenAlfabetico" />
+
+    <TextView
+        android:id="@+id/ordenCronologicoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/labelOrden"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/botonOrdenCronologico"
+        app:layout_constraintEnd_toStartOf="@+id/botonOrdenPrecio"
+        app:layout_constraintTop_toTopOf="@+id/botonOrdenCronologico" />
+
+    <ImageButton
+        android:id="@+id/botonOrdenPrecio"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:background="#77000000"
+        android:contentDescription="@string/descripcionBotonOrdenPrecio"
+        app:layout_constraintBottom_toBottomOf="@+id/botonOrdenCronologico"
+        app:layout_constraintEnd_toStartOf="@+id/ordenPrecioTextView"
+        app:layout_constraintTop_toTopOf="@+id/botonOrdenCronologico"
+        app:srcCompat="@drawable/ic_ordenar_precio"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/ordenPrecioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/labelOrden"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/botonOrdenPrecio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/botonOrdenPrecio" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

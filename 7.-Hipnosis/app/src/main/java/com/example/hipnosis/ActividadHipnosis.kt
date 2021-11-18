@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import android.view.animation.AnimationUtils
 import androidx.core.view.GestureDetectorCompat
 
 private const val TAG = "ActividadHipnosis"
 private lateinit var vistaHipnosis: VistaHipnosis
+private var factorEscala = 1F
 
 class ActividadHipnosis : AppCompatActivity() {
     private lateinit var detectorGestos: GestureDetectorCompat
+    private lateinit var detectorEscalamiento: ScaleGestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,11 @@ class ActividadHipnosis : AppCompatActivity() {
         vistaHipnosis = findViewById(R.id.vistaHipnosis)
         //detectorGestos = GestureDetectorCompat(this, this)
         detectorGestos = GestureDetectorCompat(this, ListenerGestos())
+        detectorEscalamiento = ScaleGestureDetector(this, ListenerEscala())
+        AnimationUtils.loadAnimation(this, R.anim.animacion).also {
+            animacion ->
+            vistaHipnosis.startAnimation(animacion)
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -45,11 +54,23 @@ class ActividadHipnosis : AppCompatActivity() {
         Log.i(TAG, "$evento sucedió en x = ${posicion.x}, y = ${posicion.y}")
         return true
         */
-        if(detectorGestos.onTouchEvent(event)) {
+        if(detectorGestos.onTouchEvent(event) || detectorEscalamiento.onTouchEvent(event)) {
             return true
         }
         super.onTouchEvent(event)
         return false
+    }
+
+    private class ListenerEscala: ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            Log.d(TAG, "onScale: scaleFactor = ${detector.scaleFactor}")
+            factorEscala *= detector.scaleFactor
+            Log.d(TAG, "onScale: factorEscala = $factorEscala")
+            factorEscala = 0.1F.coerceAtLeast(factorEscala.coerceAtMost(2F))
+            vistaHipnosis.scaleX = factorEscala
+            vistaHipnosis.scaleY = factorEscala
+            return true
+        }
     }
 
     private class ListenerGestos: GestureDetector.SimpleOnGestureListener() {
@@ -57,6 +78,7 @@ class ActividadHipnosis : AppCompatActivity() {
             Log.d(TAG, "onDown en el Listener anidado")
             return true
         }
+
         override fun onScroll(
             e1: MotionEvent?,
             e2: MotionEvent?,
@@ -67,6 +89,13 @@ class ActividadHipnosis : AppCompatActivity() {
             vistaHipnosis.x -= distanceX
             vistaHipnosis.y -= distanceY
             return true
+        }
+
+        override fun onLongPress(e: MotionEvent?) {
+            AnimationUtils.loadAnimation(vistaHipnosis.context, R.anim.animacion).also {
+                animacion ->
+                vistaHipnosis.startAnimation(animacion)
+            }
         }
     }
 

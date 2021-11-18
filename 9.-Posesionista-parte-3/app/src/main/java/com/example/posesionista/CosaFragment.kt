@@ -10,20 +10,19 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-
-private const val TAG = "CosaFragment"
 
 class CosaFragment: Fragment() {
     private lateinit var cosa:Cosa
@@ -34,6 +33,7 @@ class CosaFragment: Fragment() {
     private lateinit var imagenCosa: ImageView
     private lateinit var botonCamara: ImageButton
     private lateinit var botonFecha: ImageButton
+    private lateinit var botonBorrarFoto: ImageButton
     private lateinit var archivoFoto: File
 
     //Contrato para el registro de la respuesta de la cámara
@@ -47,6 +47,7 @@ class CosaFragment: Fragment() {
             //Asignamos la imágen tomada al ImageView de la cosa
             //imagenCosa.setImageBitmap(datos?.extras?.get("data") as Bitmap)
             imagenCosa.setImageBitmap(BitmapFactory.decodeFile(archivoFoto.absolutePath))
+            botonBorrarFoto.isEnabled = true
         }
     }
 
@@ -69,11 +70,18 @@ class CosaFragment: Fragment() {
         labelFecha = vista.findViewById(R.id.campoFecha) as TextView
         botonCamara = vista.findViewById(R.id.botonCamara)
         botonFecha = vista.findViewById(R.id.botonFecha)
+        botonBorrarFoto = vista.findViewById(R.id.botonBorrarFoto)
         imagenCosa = vista.findViewById(R.id.imagenCosa) as ImageView
         //Extrae la foto guardada en disco para la cosa
         archivoFoto = File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "${cosa.id}.jpg")
         //Decodifica la foto y la muestra en el ImageView designado
-        imagenCosa.setImageBitmap(BitmapFactory.decodeFile(archivoFoto.absolutePath))
+        if(archivoFoto.exists()) {
+            imagenCosa.setImageBitmap(BitmapFactory.decodeFile(archivoFoto.absolutePath))
+        }
+        else {
+            imagenCosa.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sin_imagen_dark))
+            botonBorrarFoto.isEnabled = false
+        }
         campoNombre.setText(cosa.nombre)
         campoPrecio.setText(cosa.precio.toString())
         campoNumeroSerie.setText(cosa.numeroSerie)
@@ -83,6 +91,14 @@ class CosaFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val botonAtrasCallback = object: OnBackPressedCallback(false) {
+            override fun handleOnBackPressed() {
+                //Al utilizar este callback, el botón atrás no hará nada
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, botonAtrasCallback)
 
         //Implementamos TextWatcher para saber cuando se cambia la info. de las cosas
         val observador = object: TextWatcher {
@@ -94,14 +110,14 @@ class CosaFragment: Fragment() {
                 if(s.hashCode() == campoNombre.text.hashCode()) {
                     //Si el nombre está vacío
                     if(s.toString().isEmpty()) {
-                        //Alerta al usuario con un Toast
-                        val toast = Toast.makeText(context, "No puede dejar el campo de Nombre vacío", Toast.LENGTH_SHORT)
-                        toast.show()
-                        cosa.nombre = "(Cosa sin nombre)"
+                        //Deshabilita el botón atrás y alerta al usuario con un Toast
+                        botonAtrasCallback.isEnabled = true
+                        Toast.makeText(requireContext(), "No puede dejar el campo de Nombre vacío", Toast.LENGTH_SHORT).show()
                     }
                     //Si no
                     else {
-                        //
+                        //Habilita el botón atrás y guarda el nombre de cosa
+                        botonAtrasCallback.isEnabled = false
                         cosa.nombre = s.toString()
                     }
                 }
@@ -174,8 +190,19 @@ class CosaFragment: Fragment() {
                     //Lanzamos el intento
                     respuestaCamara.launch(intentTomarFoto)
                 } catch (e: ActivityNotFoundException) {
-                    Log.d(TAG, "No se encontró la cámara")
                 }
+            }
+        }
+
+        //Al hacer click en el botón de borrar foto
+        botonBorrarFoto.apply {
+            setOnClickListener {
+                //Borra la foto
+                archivoFoto.delete()
+                //Coloca el placeholder
+                imagenCosa.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sin_imagen_dark))
+                //Deshabilita el botón de borrar foto
+                botonBorrarFoto.isEnabled = false
             }
         }
     }

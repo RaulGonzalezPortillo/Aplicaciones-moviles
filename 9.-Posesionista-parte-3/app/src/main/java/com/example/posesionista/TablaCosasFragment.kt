@@ -1,12 +1,10 @@
-@file:Suppress("DEPRECATION", "UNUSED")
+@file:Suppress("DEPRECATION", "UNUSED", "SetTextI18n", "NotifyDataSetChanged")
 
 package com.example.posesionista
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,16 +16,21 @@ import androidx.recyclerview.widget.RecyclerView
 import android.app.AlertDialog
 import android.graphics.BitmapFactory
 import android.os.Environment
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import java.io.File
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.*
 
 private const val TAG = "TablaCosasFragment"
 
 class TablaCosasFragment: Fragment() {
+    private lateinit var totalCosasTextView: TextView
+    private lateinit var sumaTotalPreciosTextView: TextView
+
     private var callbackInterfaz: InterfazTablaCosas? = null
     private var inventarioAdaptador: InventarioAdaptador? = null
     private lateinit var inventarioRecyclerView: RecyclerView
@@ -55,7 +58,6 @@ class TablaCosasFragment: Fragment() {
         super.onCreate(savedInstanceState)
         //Al crear la tabla de cosas, indica que existe un menu que renderizar
         setHasOptionsMenu(true)
-        Log.d(TAG, "Total de cosas: ${tablaCosasViewModel.inventario.size}")
     }
 
     //Reemplazamos la función con la que creamos el menú de opciones
@@ -71,9 +73,12 @@ class TablaCosasFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val vista = inflater.inflate(R.layout.lista_cosas_fragment, container, false)
-        inventarioRecyclerView = vista.findViewById(R.id.cosa_recycler_view) as RecyclerView
+        inventarioRecyclerView = vista.findViewById(R.id.cosa_recycler_view)
         inventarioRecyclerView.layoutManager = LinearLayoutManager(context)
+        totalCosasTextView = vista.findViewById(R.id.totalCosasTextView)
+        sumaTotalPreciosTextView = vista.findViewById(R.id.sumaTotalPreciosTextView)
         actualizarUI()
+        actualizarPieTabla()
         return vista
     }
 
@@ -90,7 +95,7 @@ class TablaCosasFragment: Fragment() {
             R.id.itemNuevaCosa -> {
                 //Crea una nueva cosa, abre el editor para esa cosa y agrega la nueva cosa a la tabla
                 val nuevaCosa = Cosa()
-                tablaCosasViewModel.agregaCosa(nuevaCosa)
+                tablaCosasViewModel.agregarCosa(nuevaCosa)
                 callbackInterfaz?.onCosaSeleccionada(nuevaCosa, tablaCosasViewModel)
                 true
             }
@@ -107,28 +112,37 @@ class TablaCosasFragment: Fragment() {
         barraActividad.supportActionBar?.setTitle(R.string.app_name)
     }
 
+    override fun onResume() {
+        super.onResume()
+        actualizarPieTabla()
+    }
+
     private fun actualizarUI() {
         val inventario = tablaCosasViewModel.inventario
         inventarioAdaptador = InventarioAdaptador(inventario)
         inventarioRecyclerView.adapter = inventarioAdaptador
     }
 
+    private fun actualizarPieTabla() {
+        totalCosasTextView.text = "${tablaCosasViewModel.calcularTotalCosas()}"
+        sumaTotalPreciosTextView.text = "$${tablaCosasViewModel.calcularSumaPreciosInventario()}"
+    }
+
 
     private inner class CosaHolder(vista: View): RecyclerView.ViewHolder(vista), View.OnClickListener {
         //Creamos referencias a los elementos de cosa_layout
-        private val thumbnailImageView: ImageView = itemView.findViewById(R.id.thumbnailImageView)
-        private val nombreTextView: TextView = itemView.findViewById(R.id.nombreTextView)
-        private val precioTextView: TextView = itemView.findViewById(R.id.precioTextView)
-        private val numeroSerieTextView: TextView = itemView.findViewById(R.id.numeroSerieTextView)
+        private val thumbnailImageView: ImageView = vista.findViewById(R.id.thumbnailImageView)
+        private val nombreTextView: TextView = vista.findViewById(R.id.nombreTextView)
+        private val precioTextView: TextView = vista.findViewById(R.id.precioTextView)
+        private val numeroSerieTextView: TextView = vista.findViewById(R.id.numeroSerieTextView)
 
         //Referencia a cosa_layout
-        val cosaLayout: ConstraintLayout = itemView.findViewById(R.id.cosa_layout)
-
-        private lateinit var cosa: Cosa
+        val cosaLayout: ConstraintLayout = vista.findViewById(R.id.cosa_layout)
 
         var colorItem = ""
 
-        @SuppressLint("SetTextI18n")
+        private lateinit var cosa: Cosa
+
         fun binding(cosa:Cosa) {
             this.cosa = cosa
             nombreTextView.text = cosa.nombre
@@ -163,7 +177,7 @@ class TablaCosasFragment: Fragment() {
         }
 
         init {
-            itemView.setOnClickListener(this)
+            vista.setOnClickListener(this)
         }
 
         override fun onClick(p0: View?) {
@@ -171,9 +185,9 @@ class TablaCosasFragment: Fragment() {
         }
     }
 
-    private inner class CosaAdaptador(var inventario: List<Cosa>): RecyclerView.Adapter<CosaHolder>() {
-        override fun onBindViewHolder(holder: CosaHolder, position: Int) {
-            val cosa = inventario[position]
+    private inner class CosaAdaptador(var inventario: ArrayList<Cosa>): RecyclerView.Adapter<CosaHolder>() {
+        override fun onBindViewHolder(holder: CosaHolder, posicion: Int) {
+            val cosa = inventario[posicion]
             holder.binding(cosa)
         }
 
@@ -187,26 +201,42 @@ class TablaCosasFragment: Fragment() {
         }
 
         //Función que elimína items del inventario
-        @SuppressLint("NotifyDataSetChanged")
         fun remueveCosa(posicion: Int) {
+            var rutaFotos: File?
+            var archivoFoto: File
             val constructor = AlertDialog.Builder(activity)
             constructor.setTitle("Advertencia")
             constructor.setMessage("¿Desea eliminar esta cosa?")
             //Si el usuario hace dismiss (dando tap fuera del dialogo por ejemplo)
             constructor.setOnDismissListener {
                 //Actualiza la vista
+                inventarioAdaptador?.notifyDataSetChanged()
                 notifyDataSetChanged()
             }
             //Si hace tap en Aceptar
             constructor.setPositiveButton("Aceptar") { _ , _ ->
                 //Remueve del inventario el item con la posición recibida
-                inventario = inventario.filterIndexed { indice, _ ->
-                    indice != posicion
+                try {
+                    //Comienza por quitar la imagen guardada
+                    rutaFotos = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                    archivoFoto = File(rutaFotos, "${inventario[posicion].id}.jpg")
+                    if(archivoFoto.exists())
+                        archivoFoto.delete()
+                    //Después le pide al ViewModel que quite la cosa en la posición indicada
+                    tablaCosasViewModel.removerCosa(inventario[posicion])
+                    inventarioAdaptador?.notifyDataSetChanged()
+                    notifyDataSetChanged()
+                    actualizarPieTabla()
                 }
-                notifyDataSetChanged()
+                catch (e: Exception) {
+                    e.printStackTrace()
+                    inventarioAdaptador?.notifyDataSetChanged()
+                    notifyDataSetChanged()
+                }
             }
             //Si hace tap en Cancelar
             constructor.setNegativeButton("Cancelar") { _ , _ ->
+                inventarioAdaptador?.notifyDataSetChanged()
                 notifyDataSetChanged()
             }
             //Creamos un AlertDialog con el constructor y lo mostramos al usuario
@@ -216,19 +246,83 @@ class TablaCosasFragment: Fragment() {
     }
 
     private inner class InventarioAdaptador(var inventario: ArrayList<Seccion>): RecyclerView.Adapter<InventarioAdaptador.InventarioHolder>() {
+
         inner class InventarioHolder(vista: View): RecyclerView.ViewHolder(vista) {
-            private val cosaRecyclerView: RecyclerView = vista.findViewById(R.id.cosasRecyclerView)
+            private val cosasRecyclerView: RecyclerView = vista.findViewById(R.id.cosasRecyclerView)
             private val seccionTextView: TextView = vista.findViewById(R.id.seccionTextView)
             private val numeroCosasTextView: TextView = vista.findViewById(R.id.numeroCosasTextView)
             private val sumaPreciosTextView: TextView = vista.findViewById(R.id.sumaPreciosTextView)
+            private val botonOrdenAlfabetico: ImageButton = vista.findViewById(R.id.botonOrdenAlfabetico)
+            private val botonOrdenCronologico: ImageButton = vista.findViewById(R.id.botonOrdenCronologico)
+            private val botonOrdenPrecio: ImageButton = vista.findViewById(R.id.botonOrdenPrecio)
+            private val ordenAlfabeticoTextView: TextView = vista.findViewById(R.id.ordenAlfabeticoTextView)
+            private val ordenCronologicoTextView: TextView = vista.findViewById(R.id.ordenCronologicoTextView)
+            private val ordenPrecioTextView: TextView = vista.findViewById(R.id.ordenPrecioTextView)
 
             fun binding(seccion: Seccion) {
-                seccionTextView.text = seccion.nombre
-                numeroCosasTextView.text = "Pendiente"
-                sumaPreciosTextView.text = "Pendiente"
                 val cosaAdaptador = CosaAdaptador(seccion.lista)
-                cosaRecyclerView.layoutManager = LinearLayoutManager(context)
-                cosaRecyclerView.adapter = cosaAdaptador
+                seccionTextView.text = seccion.nombre
+                numeroCosasTextView.text = "${seccion.lista.size}"
+                sumaPreciosTextView.text = "$${tablaCosasViewModel.calcularSumaPreciosSeccion(seccion.lista)}"
+                cosasRecyclerView.layoutManager = LinearLayoutManager(context)
+                cosasRecyclerView.adapter = cosaAdaptador
+
+                //Habilita o deshabilita los botones de ordenamiento, dependiendo si hay al menos un elemento en la sección
+                if(seccion.lista.size > 1) {
+                    botonOrdenAlfabetico.isEnabled = true
+                    botonOrdenCronologico.isEnabled = true
+                    botonOrdenPrecio.isEnabled = true
+                }
+                else {
+                    botonOrdenAlfabetico.isEnabled = false
+                    botonOrdenCronologico.isEnabled = false
+                    botonOrdenPrecio.isEnabled = false
+                }
+
+                botonOrdenAlfabetico.apply {
+                    setOnClickListener {
+                        if(ordenAlfabeticoTextView.text == "▲") {
+                            tablaCosasViewModel.ordenarAlfabeticamente(seccion.lista[0].precio, true)
+                            ordenAlfabeticoTextView.text = "▼"
+                            notifyDataSetChanged()
+                        }
+                        else {
+                            tablaCosasViewModel.ordenarAlfabeticamente(seccion.lista[0].precio, false)
+                            ordenAlfabeticoTextView.text = "▲"
+                            notifyDataSetChanged()
+                        }
+                    }
+                }
+
+                botonOrdenCronologico.apply {
+                    setOnClickListener {
+                        if(ordenCronologicoTextView.text == "▲") {
+                            tablaCosasViewModel.ordenarCronologicamente(seccion.lista[0].precio, true)
+                            ordenCronologicoTextView.text = "▼"
+                            notifyDataSetChanged()
+                        }
+                        else {
+                            tablaCosasViewModel.ordenarCronologicamente(seccion.lista[0].precio, false)
+                            ordenCronologicoTextView.text = "▲"
+                            notifyDataSetChanged()
+                        }
+                    }
+                }
+
+                botonOrdenPrecio.apply {
+                    setOnClickListener {
+                        if(ordenPrecioTextView.text == "▲") {
+                            tablaCosasViewModel.ordenarPrecio(seccion.lista[0].precio, true)
+                            ordenPrecioTextView.text = "▼"
+                            notifyDataSetChanged()
+                        }
+                        else {
+                            tablaCosasViewModel.ordenarPrecio(seccion.lista[0].precio, false)
+                            ordenPrecioTextView.text = "▲"
+                            notifyDataSetChanged()
+                        }
+                    }
+                }
 
                 //Hacemos un callback a ItemTouchHelper, especificando las direcciones que vamos a utilizar
                 val callbackGestos = object: ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
@@ -238,25 +332,34 @@ class TablaCosasFragment: Fragment() {
                         viewHolder: RecyclerView.ViewHolder,
                         target: RecyclerView.ViewHolder
                     ): Boolean {
-                        //Obtenemos las posiciones del elemento
-                        val posicionInicial = viewHolder.adapterPosition
-                        val posicionFinal = target.adapterPosition
-                        //Intercambiamos la posición de la cosa en el inventario
-                        Collections.swap(seccion.lista, posicionInicial, posicionFinal)
-                        cosaAdaptador.notifyItemMoved(posicionInicial, posicionFinal)
+                        try {
+                            //Obtenemos las posiciones del elemento
+                            val posicionInicial = viewHolder.adapterPosition
+                            val posicionFinal = target.adapterPosition
+                            if (posicionInicial != posicionFinal) {
+                                //Intercambiamos la posición de la cosa en el inventario
+                                Collections.swap(seccion.lista, posicionInicial, posicionFinal)
+                                cosaAdaptador.notifyItemMoved(posicionInicial, posicionFinal)
+                            }
+                        }
+                        catch (e: Exception) {
+                            e.printStackTrace()
+                            inventarioAdaptador?.notifyDataSetChanged()
+                            notifyDataSetChanged()
+                        }
                         return false
                     }
                     //Al deslizar...
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direccion: Int) {
                         //...hacia la izquierda
-                        if(direction == ItemTouchHelper.LEFT) {
+                        if(direccion == ItemTouchHelper.LEFT) {
                             cosaAdaptador.remueveCosa(viewHolder.adapterPosition)
                         }
                     }
                 }
                 //Adjunta el ItemTouchHelper a cosaRecyclerView
                 val itemTouchHelper = ItemTouchHelper(callbackGestos)
-                itemTouchHelper.attachToRecyclerView(cosaRecyclerView)
+                itemTouchHelper.attachToRecyclerView(cosasRecyclerView)
             }
         }
 
@@ -267,6 +370,24 @@ class TablaCosasFragment: Fragment() {
 
         override fun onBindViewHolder(inventarioHolder: InventarioHolder, posicion: Int) {
             inventarioHolder.binding(inventario[posicion])
+            inventarioHolder.itemView.setBackgroundColor(Color.parseColor(obtenerColorSeccion(posicion)))
+        }
+
+        fun obtenerColorSeccion(posicion: Int): String {
+            val colorSeccion = when(posicion) {
+                0 -> "#f72585"
+                1 -> "#b5179e"
+                2 -> "#7209b7"
+                3 -> "#560bad"
+                4 -> "#480ca8"
+                5 -> "#3a0ca3"
+                6 -> "#3f37c9"
+                7 -> "#4361ee"
+                8 -> "#4895ef"
+                9 -> "#4cc9f0"
+                else -> "#3a0ca3"
+            }
+            return colorSeccion
         }
 
         override fun getItemCount(): Int {

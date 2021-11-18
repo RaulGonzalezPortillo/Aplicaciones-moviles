@@ -104,6 +104,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonFecha"
+        tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <ImageButton
@@ -113,7 +114,7 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/descripcionBotonCamara"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/botonBorrarFoto"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_camera"
@@ -139,5 +140,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/campoFecha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/campoFecha" />
+
+    <ImageButton
+        android:id="@+id/botonBorrarFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/descripcionBotonBorrarFoto"
+        app:layout_constraintBottom_toBottomOf="@+id/botonCamara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/botonCamara"
+        app:layout_constraintTop_toTopOf="@+id/botonCamara"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

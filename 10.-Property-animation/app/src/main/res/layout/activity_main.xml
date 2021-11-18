@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="UsingOnClickInXml">
+
+    <ImageView
+        android:id="@+id/imagenMrSparkle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/descripcionImagenMrSparkle"
+        app:layout_constraintBottom_toTopOf="@+id/botonRotar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mr_sparkle" />
+
+    <Button
+        android:id="@+id/botonMulti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="multi"
+        android:text="@string/botonMulti"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/botonTransparencia"
+        app:layout_constraintTop_toTopOf="@+id/botonTransparencia" />
+
+    <Button
+        android:id="@+id/botonMover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="mover"
+        android:text="@string/botonMover"
+        app:layout_constraintEnd_toStartOf="@+id/botonEscalar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/botonRotar"
+        app:layout_constraintTop_toTopOf="@+id/botonRotar" />
+
+    <Button
+        android:id="@+id/botonTransparencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="transparencia"
+        android:text="@string/botonTransparencia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/botonMulti"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/botonColores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="colores"
+        android:text="@string/botonColores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/botonEscalar"
+        app:layout_constraintTop_toTopOf="@+id/botonEscalar" />
+
+    <Button
+        android:id="@+id/botonEscalar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="escalar"
+        android:text="@string/botonEscalar"
+        app:layout_constraintEnd_toStartOf="@+id/botonColores"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/botonMover"
+        app:layout_constraintTop_toTopOf="@+id/botonMover" />
+
+    <Button
+        android:id="@+id/botonRotar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="rotar"
+        android:text="@string/botonRotar"
+        app:layout_constraintBottom_toTopOf="@+id/botonTransparencia"
+        app:layout_constraintEnd_toStartOf="@+id/botonMover"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

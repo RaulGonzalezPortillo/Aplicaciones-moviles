@@ -16,9 +16,11 @@
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/6.-Posesionista-parte-2/app/src/main/res/menu/menu_tabla_cosas.xml" value="0.36666666666666664" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/6.-Posesionista-parte-2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.275" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/6.-Posesionista-parte-2/app/src/main/res/xml/files.xml" value="0.21614583333333334" />
-        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/cosa_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/cosa_fragment.xml" value="0.33" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/cosa_layout.xml" value="0.33" />
-        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/seccion_layout.xml" value="0.33" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/lista_cosas_fragment.xml" value="0.33" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/9.-Posesionista-parte-3/app/src/main/res/layout/seccion_layout.xml" value="0.5" />
       </map>
     </option>
   </component>

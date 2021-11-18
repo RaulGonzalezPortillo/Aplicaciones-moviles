@@ -15,4 +15,10 @@
     <string name="headerSumaPrecios">Suma de los precios:</string>
     <string name="labelNumeroCosas">0</string>
     <string name="labelSumaPrecios">$0</string>
+    <string name="headerTotalCosas">Número total de cosas:</string>
+    <string name="descripcionBotonBorrarFoto">Botón borrar foto</string>
+    <string name="labelOrden">▲</string>
+    <string name="descripcionBotonOrdenAlfabetico">Botón de orden alfabético</string>
+    <string name="descripcionBotonOrdenCronologico">Botón de orden cronológico</string>
+    <string name="descripcionBotonOrdenPrecio">Botón de orden por precio</string>
 </resources>

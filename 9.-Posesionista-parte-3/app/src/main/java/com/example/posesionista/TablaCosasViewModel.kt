@@ -31,7 +31,7 @@ class TablaCosasViewModel: ViewModel() {
     //Llenamos la lista de secciones con sus respectivos nombres
     init {
         inventario.add(Seccion("$0 a $99", arrayListOf()))
-        for (i in 1 until 9) {
+        for (i in 1 until 10) {
             inventario.add(Seccion("$${i}00 a $${i}99", arrayListOf()))
         }
         inventario.add(Seccion("Más de $1000", arrayListOf()))
@@ -47,10 +47,43 @@ class TablaCosasViewModel: ViewModel() {
             cosa.nombre = "$nombreAleatorio $adjetivoAleatorio"
             cosa.precio = precioAleatorio
             //La añadimos al inventario
-            agregaCosa(cosa)
+            agregarCosa(cosa)
         }
     }
 
+    //Función que agrega una cosa al inventario
+    fun agregarCosa(cosa: Cosa) {
+        val indice = determinarSeccion(cosa.precio)
+        inventario[indice].lista.add(cosa)
+    }
+
+    fun calcularSumaPreciosSeccion(lista: ArrayList<Cosa>): Int {
+        var sumaPrecios = 0
+        for (cosa in lista) {
+            sumaPrecios += cosa.precio
+        }
+        return sumaPrecios
+    }
+
+    fun calcularSumaPreciosInventario(): Int {
+        var sumaPrecios = 0
+        for (i in 0 until 11) {
+            for (cosa in inventario[i].lista) {
+                sumaPrecios += cosa.precio
+            }
+        }
+        return sumaPrecios
+    }
+
+    fun calcularTotalCosas(): Int {
+        var totalCosas = 0
+        for (i in 0 until 11) {
+            totalCosas += inventario[i].lista.size
+        }
+        return totalCosas
+    }
+
+    //Función que nos dice en que índice del arreglo inventario está una cosa, con base en el precio
     fun determinarSeccion(precio: Int): Int {
         val indice = when(precio) {
             in 0..99 -> 0
@@ -68,9 +101,59 @@ class TablaCosasViewModel: ViewModel() {
         return indice
     }
 
-    //Función que agrega una cosa al inventario
-    fun agregaCosa(cosa: Cosa) {
-        val indice = determinarSeccion(cosa.precio)
-        inventario[indice].lista.add(cosa)
+    //Función que ordena el inventario alfabéticamente
+    fun ordenarAlfabeticamente(precio: Int, flagOrden: Boolean) {
+        val posicion = determinarSeccion(precio)
+        //Si recibe true en la flag de orden
+        if (flagOrden) {
+            //Ordena de forma alfabética-ascendente
+            inventario[posicion].lista.sortBy { it.nombre }
+        }
+        //Si no
+        else {
+            //Ordena de forma alfabética-descendente
+            inventario[posicion].lista.sortByDescending { it.nombre }
+        }
+    }
+
+    //Función que ordena el inventario cronológicamente
+    fun ordenarCronologicamente(precio: Int, flagOrden: Boolean) {
+        val posicion = determinarSeccion(precio)
+        //Al igual que ordenarAlfabeticamente, flagOrden indica si se ordenará de forma ascendente o descendente
+        if (flagOrden) {
+            inventario[posicion].lista.sortBy { it.fecha }
+        }
+        else {
+            inventario[posicion].lista.sortByDescending { it.fecha }
+        }
+    }
+
+    //Función que ordena el inventario por precio
+    fun ordenarPrecio(precio: Int, flagOrden: Boolean) {
+        val posicion = determinarSeccion(precio)
+        if (flagOrden) {
+            inventario[posicion].lista.sortBy { it.precio }
+        }
+        else {
+            inventario[posicion].lista.sortByDescending { it.precio }
+        }
+    }
+
+    fun ordenarSeccion(cosa: Cosa, indiceActual: Int) {
+        val nuevoIndice = determinarSeccion(cosa.precio)
+        if (nuevoIndice != indiceActual) {
+            val seccionReordenada = inventario[indiceActual].lista.filter {
+                it.precio in rangos[indiceActual]
+            }
+            inventario[indiceActual].lista.clear()
+            inventario[indiceActual].lista.addAll(seccionReordenada)
+            inventario[nuevoIndice].lista.add(cosa)
+        }
+    }
+
+    //Función que remueve una cosa del inventario
+    fun removerCosa(cosa: Cosa) {
+        val seccion = determinarSeccion(cosa.precio)
+        inventario[seccion].lista.remove(cosa)
     }
 }
