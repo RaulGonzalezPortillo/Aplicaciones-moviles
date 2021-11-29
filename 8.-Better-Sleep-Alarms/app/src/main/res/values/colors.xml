@@ -5,7 +5,6 @@
     <color name="teal_200">#80CBC4</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bottomNavigationViewBackground">#283345</color>
     <color name="darkGradientStart">#111927</color>
     <color name="darkGradientEnd">#2A3D61</color>
     <color name="dodgerBlue">#1E90FF</color>

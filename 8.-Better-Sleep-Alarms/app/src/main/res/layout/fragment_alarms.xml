@@ -8,37 +8,526 @@
     tools:context=".AlarmsFragment">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/alarms_placeholder"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/alarmsButtonPlaceholder"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/alarmsButtonPlaceholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/alarms_button_placeholder"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/sundayAlarmTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/time_text_view"
-        android:textColor="@color/white"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/sundayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/sundayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/sundayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/sunday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saturdayAlarmTextView" />
+
+    <Button
+        android:id="@+id/sundayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/sunday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sundayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/sundaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/sundaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/sundaySleepCyclesTextView" />
+
+    <TextView
+        android:id="@+id/sundaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/sundayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/sundayAlarmHeader" />
+
+    <Button
+        android:id="@+id/sundayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/sunday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/sundayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/sundayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/saturdayAlarmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_text_view"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/saturdayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/saturdayAlarmHeader" />
+
+    <Button
+        android:id="@+id/saturdayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/saturday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saturdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/saturdayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/saturday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/saturdayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/saturdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/saturdayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/saturday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fridayAlarmTextView" />
+
+    <TextView
+        android:id="@+id/saturdaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/saturdaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/saturdaySleepCyclesTextView" />
+
+    <TextView
+        android:id="@+id/saturdaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/saturdayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/saturdayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/fridayAlarmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_text_view"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/fridayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/fridayAlarmHeader" />
+
+    <Button
+        android:id="@+id/fridayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/friday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fridayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/fridayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/friday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/fridayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/fridayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/fridayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/friday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thursdayAlarmTextView" />
+
+    <TextView
+        android:id="@+id/fridaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/fridaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fridaySleepCyclesTextView" />
+
+    <TextView
+        android:id="@+id/fridaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/fridayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/fridayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/thursdayAlarmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_text_view"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/thursdayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/thursdayAlarmHeader" />
+
+    <Button
+        android:id="@+id/thursdayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/thursday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thursdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/thursdayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/thursday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/thursdayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/thursdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/thursdayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/thursday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayAlarmTextView" />
+
+    <TextView
+        android:id="@+id/thursdaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/thursdaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/thursdaySleepCyclesTextView" />
+
+    <TextView
+        android:id="@+id/thursdaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/thursdayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/thursdayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/wednesdayAlarmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_text_view"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/wednesdayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayAlarmHeader" />
+
+    <Button
+        android:id="@+id/wednesdayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/wednesday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/wednesdayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/wednesday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/wednesdayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/wednesdayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/wednesday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayAlarmTextView" />
+
+    <TextView
+        android:id="@+id/wednesdaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/wednesdaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdaySleepCyclesTextView" />
+
+    <TextView
+        android:id="@+id/wednesdaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/wednesdayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/tuesdayAlarmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_text_view"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/tuesdayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayAlarmHeader" />
+
+    <Button
+        android:id="@+id/tuesdayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/tuesday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/tuesdayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/tuesdaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/tuesdayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/tuesdayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tuesday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mondayAlarmTextView" />
+
+    <TextView
+        android:id="@+id/tuesdaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/tuesdaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdaySleepCyclesTextView" />
+
+    <Button
+        android:id="@+id/tuesdayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/tuesday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/mondayAlarmHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/monday_alarm_header"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mondayAlarmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_text_view"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="@+id/mondayAlarmHeader"
+        app:layout_constraintTop_toBottomOf="@+id/mondayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/mondaySleepCyclesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycles_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/mondayEditButton"
+        app:layout_constraintTop_toBottomOf="@+id/mondayAlarmHeader" />
+
+    <TextView
+        android:id="@+id/mondaySleepingTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleeping_time_text_view"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/mondaySleepCyclesTextView"
+        app:layout_constraintTop_toBottomOf="@+id/mondaySleepCyclesTextView" />
+
+    <Button
+        android:id="@+id/mondayEditButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/monday_edit_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toStartOf="@+id/mondayDeleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/mondayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/mondayDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#0DFFFFFF"
+        android:contentDescription="@string/monday_delete_button_description"
+        android:insetLeft="-7dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mondayAlarmHeader"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

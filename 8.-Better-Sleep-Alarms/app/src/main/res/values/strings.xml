@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Better Sleep Alarms</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <!-- Preference Titles -->
 
     <!-- Messages Preferences -->
@@ -19,9 +18,34 @@
     <string name="cancel_button">Cancel</string>
     <string name="current_time_header">Current time:</string>
     <string name="upcoming_alarm_header">Alarm will sound at:</string>
-    <string name="alarms_placeholder">Alarm example</string>
-    <string name="settings_placeholder">Settings will go here</string>
-    <string name="alarms_button_placeholder">Edit</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Alarm modification fragment will go here</string>
+    <string name="monday_alarm_header">Monday</string>
+    <string name="sleep_cycles_text_view">0 cycles</string>
+    <string name="sleeping_time_text_view">0:00 hours</string>
+    <string name="monday_edit_button_description">Edit Monday\'s Alarm</string>
+    <string name="monday_delete_button_description">Remove Monday\'s alarm</string>
+    <string name="tuesday_alarm_header">Tuesday</string>
+    <string name="wednesday_alarm_header">Wednesday</string>
+    <string name="thursday_alarm_header">Thursday</string>
+    <string name="friday_alarm_header">Friday</string>
+    <string name="saturday_alarm_header">Saturday</string>
+    <string name="sunday_alarm_header">Sunday</string>
+    <string name="tuesday_edit_button_description">Edit Tuesday\'s Alarm</string>
+    <string name="wednesday_edit_button_description">Edit Wednesday\'s Alarm</string>
+    <string name="thursday_edit_button_description">Edit Thursday\'s Alarm</string>
+    <string name="friday_edit_button_description">Edit Friday\'s Alarm</string>
+    <string name="saturday_edit_button_description">Edit Saturday\'s Alarm</string>
+    <string name="sunday_edit_button_description">Edit Sunday\'s Alarm</string>
+    <string name="tuesday_delete_button_description">Remove Tuesday\'s Alarm</string>
+    <string name="wednesday_delete_button_description">Remove Wednesday\'s Alarm</string>
+    <string name="thursday_delete_button_description">Remove Thursday\'s Alarm</string>
+    <string name="friday_delete_button_description">Remove Friday\'s Alarm</string>
+    <string name="saturday_delete_button_description">Remove Saturday\'s Alarm</string>
+    <string name="sunday_delete_button_description">Remove Sunday\'s Alarm</string>
+    <string name="alarm_text_view_placeholder">No alarm set</string>
+    <string name="select_sleep_cycles_header">Select sleep cycles</string>
+    <string name="select_sleep_cycles_description">Most adults need 4 to 6 sleep cycles each night</string>
+    <string name="accept_button">Accept</string>
+    <string name="current_sleep_time_header">Current sleeping time:</string>
+    <string name="remove_publicity_button">Remove ads</string>
+    <string name="your_ad_goes_here">Your ad goes here</string>
 </resources>

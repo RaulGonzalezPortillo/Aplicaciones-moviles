@@ -5,12 +5,16 @@
       <map>
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" value="0.35462962962962963" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/drawable/dark_gradient.xml" value="0.22135416666666666" />
-        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
-        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_alarms.xml" value="0.2957427536231884" />
-        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_create_alarms.xml" value="0.3087719298245614" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/drawable/ic_baseline_alarm_24.xml" value="0.1824074074074074" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/drawable/ic_baseline_bedtime_24.xml" value="0.1824074074074074" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1824074074074074" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1824074074074074" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_alarms.xml" value="0.33" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_create_alarms.xml" value="0.5" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_settings.xml" value="0.2957427536231884" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_sleep.xml" value="0.2957427536231884" />
-        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_sleeping.xml" value="0.26132246376811596" />
+        <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/layout/fragment_sleeping.xml" value="0.33" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/menu/bottom_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Escritorio/Github/Aplicaciones-moviles/8.-Better-Sleep-Alarms/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3223684210526316" />
       </map>

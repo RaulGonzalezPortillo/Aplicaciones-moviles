@@ -30,7 +30,7 @@
         android:id="@+id/sleepingFragment"
         android:name="com.raulgonzalezportillo.bettersleepalarms.SleepingFragment"
         android:label="fragment_sleeping"
-        tools:layout="@layout/fragment_sleeping" >
+        tools:layout="@layout/fragment_sleeping">
         <action
             android:id="@+id/action_sleepingFragment_to_sleepFragment"
             app:destination="@id/sleepFragment" />
@@ -39,5 +39,9 @@
         android:id="@+id/createAlarmsFragment"
         android:name="com.raulgonzalezportillo.bettersleepalarms.CreateAlarmsFragment"
         android:label="fragment_create_alarms"
-        tools:layout="@layout/fragment_create_alarms" />
+        tools:layout="@layout/fragment_create_alarms" >
+        <action
+            android:id="@+id/action_createAlarmsFragment_to_alarmsFragment"
+            app:destination="@id/alarmsFragment" />
+    </fragment>
 </navigation>

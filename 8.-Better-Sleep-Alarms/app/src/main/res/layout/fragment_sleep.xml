@@ -13,9 +13,21 @@
         android:text="@string/next_alarm_header"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/upcomingAlarmTextView"
+        app:layout_constraintBottom_toTopOf="@+id/nextAlarmTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/nextAlarmDayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alarm_text_view_placeholder"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextAlarmTextView" />
 
     <TextView
         android:id="@+id/currentTimeHeader"
@@ -24,15 +36,15 @@
         android:text="@string/ideal_sleep_time_header"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/currentTimeTextView"
+        app:layout_constraintBottom_toTopOf="@+id/idealTimeToSleepTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/upcomingAlarmTextView"
+        android:id="@+id/nextAlarmTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:text="@string/time_text_view"
         android:textColor="@color/white"
         android:textSize="80sp"
@@ -43,10 +55,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/currentTimeTextView"
+        android:id="@+id/idealTimeToSleepTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="200dp"
         android:text="@string/time_text_view"
         android:textColor="@color/white"
         android:textSize="80sp"
@@ -56,16 +68,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/cancelButton"
+        android:id="@+id/sleepNowButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/bottomNavigationViewBackground"
+        android:backgroundTint="#0DFFFFFF"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.01"
         android:paddingLeft="75dp"
         android:paddingTop="20dp"
         android:paddingRight="75dp"
         android:paddingBottom="15dp"
+        android:stateListAnimator="@null"
         android:text="@string/sleep_now_button"
         android:textAllCaps="false"
         android:textSize="18sp"
@@ -74,5 +87,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentTimeTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/idealTimeToSleepTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
