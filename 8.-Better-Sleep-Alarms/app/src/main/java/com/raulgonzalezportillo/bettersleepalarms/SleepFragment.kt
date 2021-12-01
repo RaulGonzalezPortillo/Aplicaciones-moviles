@@ -69,7 +69,7 @@ class SleepFragment : Fragment() {
                 }
                 3 -> {
                     nextAlarmDayTextView.text = "Tuesday"
-                    idealTimeToSleepTextView.text = idealTimeToSleep(viewModel.tuesdayAlarm, viewModel.thursdaySleepingTime)
+                    idealTimeToSleepTextView.text = idealTimeToSleep(viewModel.tuesdayAlarm, viewModel.tuesdaySleepingTime)
                     viewModel.currentPendingIntent = viewModel.tuesdayPendingIntent
                     viewModel.currentAlarm = viewModel.tuesdayAlarm!!
                     viewModel.currentSleepingTime = viewModel.tuesdaySleepingTime
@@ -133,7 +133,7 @@ class SleepFragment : Fragment() {
             }
             hours < 12 -> {
                 formattedString =
-                    String.format("%02d", hours) + ":" + String.format("%02d", hours) + " AM"
+                    String.format("%02d", hours) + ":" + String.format("%02d", minutes) + " AM"
             }
         }
         return formattedString

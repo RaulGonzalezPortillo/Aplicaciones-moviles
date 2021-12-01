@@ -264,7 +264,7 @@ class AlarmsFragment : Fragment() {
             }
             hours < 12 -> {
                 formattedString =
-                    String.format("%02d", hours) + ":" + String.format("%02d", hours) + " AM"
+                    String.format("%02d", hours) + ":" + String.format("%02d", minutes) + " AM"
             }
         }
         return formattedString

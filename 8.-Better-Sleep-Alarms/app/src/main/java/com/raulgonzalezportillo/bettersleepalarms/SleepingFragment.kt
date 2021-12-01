@@ -55,14 +55,14 @@ class SleepingFragment : Fragment() {
         } else {
             offset = if(differenceInMinutes < -15L) {
                 Toast.makeText(requireContext(), "Alarm adjusted by -15 minutes, Have a good night ^^", Toast.LENGTH_SHORT).show()
-                -900000L
+                900000L
             } else {
                 if(differenceInMinutes in -15..15) {
                     Toast.makeText(requireContext(), "Alarm adjusted by $differenceInMinutes minutes, Have a good night ^^", Toast.LENGTH_SHORT).show()
-                    differenceInMinutes*60000
+                    differenceInMinutes*60000*-1
                 } else {
                     Toast.makeText(requireContext(), "Alarm adjusted by 15 minutes, Have a good night ^^", Toast.LENGTH_SHORT).show()
-                    900000L
+                    -900000L
                 }
             }
         }
@@ -108,7 +108,7 @@ class SleepingFragment : Fragment() {
             }
             hours < 12 -> {
                 formattedString =
-                    String.format("%02d", hours) + ":" + String.format("%02d", hours) + " AM"
+                    String.format("%02d", hours) + ":" + String.format("%02d", minutes) + " AM"
             }
         }
         return formattedString
